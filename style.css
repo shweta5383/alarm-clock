@@ -52,10 +52,10 @@ h3 {
   margin-top: 15px;
 }
 
-#alarm-hours,
-#alarm-minutes,
-#alarm-seconds,
-#alarm-am-pm {
+#alarm-hrs,
+#alarm-min,
+#alarm-sec,
+#alarm-period {
   padding: 10px 15px;
 }
 
