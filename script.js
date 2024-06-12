@@ -1,40 +1,36 @@
 let alarms = [];
-let currentAlarmIndex = 0;
+const current_time = document.getElementById("time");
 
 // display current time
-function displayTime() {
+function displayCurrentTime() {
     const now = new Date();
     const hrs = now.getHours() % 12 || 12;
     const min = now.getMinutes();
     const sec = now.getSeconds();
     const period = now.getHours() < 12 ? 'AM' : 'PM';
 
-    time.textContent = `${hrs}:${min}:${sec} ${period}`;
+    current_time.textContent = `${hrs}:${min}:${sec} ${period}`;
 }
-
-// set interval to update time every second
-setInterval(displayTime, 1000);
 
 // set alarm
 document.getElementById('set-alarm-btn').addEventListener('click', (e) => {
     e.preventDefault();
-    const alarmHours = parseInt(document.getElementById('alarm-hours').value);
-    const alarmMinutes = parseInt(document.getElementById('alarm-minutes').value);
-    const alarmSeconds = parseInt(document.getElementById('alarm-seconds').value);
-    const alarmAmPm = document.getElementById('alarm-am-pm').value;
+    const alarmHrs = parseInt(document.getElementById('alarm-hrs').value);
+    const alarmMin = parseInt(document.getElementById('alarm-min').value);
+    const alarmSec = parseInt(document.getElementById('alarm-sec').value);
+    const alarmPeriod = document.getElementById('alarm-period').value;
 
     const alarmTime = new Date();
-    alarmTime.setHours(alarmHours + (alarmAmPm === 'PM' ? 12 : 0));
-    alarmTime.setMinutes(alarmMinutes);
-    alarmTime.setSeconds(alarmSeconds);
+    alarmTime.setHours(alarmHrs + (alarmPeriod === 'PM' ? 12 : 0));
+    alarmTime.setMinutes(alarmMin);
+    alarmTime.setSeconds(alarmSec);
 
     alarms.push(alarmTime);
-    console.log(alarms);
-    displayAlarms();
+    displayAlarmsList();
 });
 
 // display alarms
-function displayAlarms() {
+function displayAlarmsList() {
     const alarmsList = document.getElementById('alarms-list');
     alarmsList.innerHTML = '';
 
@@ -54,7 +50,7 @@ function displayAlarms() {
             .querySelector(".delete-alarm")
             .addEventListener("click", () => {
                 alarmDiv.remove();
-                if (idx !== -1) {
+                if (index !== -1) {
                     alarms.splice(index, 1);
                 }
             });
@@ -63,14 +59,17 @@ function displayAlarms() {
     });
 }
 
-// // check for alarms every second
+// set interval to update time every second
+setInterval(displayCurrentTime, 1000);
+
+//check for alarms every second
 setInterval(() => {
     const now = new Date();
     alarms.map((alarm, index) => {
         if (now.getTime() >= alarm.getTime()) {
-            alert(`Alarm: ${alarm.toLocaleTimeString()}`);
+            alert(`Alarm Ringing!`);
             alarms.splice(index, 1);
-            displayAlarms();
+            displayAlarmsList();
         }
     });
 }, 1000);
