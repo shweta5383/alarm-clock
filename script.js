@@ -66,7 +66,7 @@ function displayAlarms() {
 // // check for alarms every second
 setInterval(() => {
     const now = new Date();
-    alarms.forEach((alarm, index) => {
+    alarms.map((alarm, index) => {
         if (now.getTime() >= alarm.getTime()) {
             alert(`Alarm: ${alarm.toLocaleTimeString()}`);
             alarms.splice(index, 1);
