@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm Clock</title>
+</head>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="alarm-clock">
+        <h1>Alarm Clock</h1>
+        <div class="time" id="time">
+            00:00:00
+        </div>
+        <form id="set-alarm-form">
+            <div id="alarm-div" style="display: flex;">
+                <div class="form-group">
+                    <label for="alarm-hours">Hours</label>
+                    <input type="number" id="alarm-hours" min="1" max="12" value="12">
+                </div>
+                <div class="form-group">
+                    <label for="alarm-minutes">Minutes</label>
+                    <input type="number" id="alarm-minutes" min="0" max="59" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="alarm-seconds">Seconds</label>
+                    <input type="number" id="alarm-seconds" min="0" max="59" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="alarm-am-pm">AM/PM</label>
+                    <select id="alarm-am-pm">
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>
+                    </select>
+                </div>
+            </div>
+            <button id="set-alarm-btn">Set Alarm</button>
+        </form>
+        <ul id="alarms-list">
+            <!-- alarms will be displayed here -->
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
