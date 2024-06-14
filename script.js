@@ -35,10 +35,12 @@ document.getElementById('set-alarm-btn').addEventListener('click', (e) => {
 
     if (alarms.includes(alarmTime)) {
         alert(`Alarm already set for this time ${alarmTime}`);
-    } else {
-        alarms.push(alarmTime);
-        displayAlarmsList();
+        return;
     }
+
+    alarms.push(alarmTime);
+    displayAlarmsList();
+
 
 });
 
@@ -73,6 +75,7 @@ function displayAlarmsList() {
 
 //display alarm alert
 function checkClockAlarm(currentTime) {
+    console.log();
     alarms.map((alarm, idx) => {
         if (alarm === currentTime) {
             alert('Alarm ringing!');
