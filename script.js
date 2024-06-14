@@ -1,5 +1,10 @@
 let alarms = [];
-const current_time = document.getElementById("time");
+const CurrentTimeEle = document.getElementById("time");
+const alarmHrsEle = document.getElementById('alarm-hrs');
+const alarmMinEle = document.getElementById('alarm-min');
+const alarmSecEle = document.getElementById('alarm-sec');
+const alarmPeriodEle = document.getElementById('alarm-period');
+const alarmsListEle = document.getElementById('alarms-list');
 
 // display current time
 function displayCurrentTime() {
@@ -9,38 +14,42 @@ function displayCurrentTime() {
     const curr_sec = now.getSeconds();
     const period = now.getHours() < 12 ? 'AM' : 'PM';
 
-    current_time.textContent = `${curr_hrs}:${curr_min}:${curr_sec} ${period}`;
+    CurrentTimeEle.textContent = `${curr_hrs}:${curr_min}:${curr_sec} ${period}`;
     checkClockAlarm(`${curr_hrs}:${curr_min}:${curr_sec} ${period}`);
 }
 
 // set alarm
 document.getElementById('set-alarm-btn').addEventListener('click', (e) => {
     e.preventDefault();
-    const alarmHrs = parseInt(document.getElementById('alarm-hrs').value);
-    const alarmMin = parseInt(document.getElementById('alarm-min').value);
-    const alarmSec = parseInt(document.getElementById('alarm-sec').value);
-    const alarmPeriod = document.getElementById('alarm-period').value;
+    const alarmHrs = parseInt(alarmHrsEle.value);
+    const alarmMin = parseInt(alarmMinEle.value);
+    const alarmSec = parseInt(alarmSecEle.value);
+    const alarmPeriod = alarmPeriodEle.value;
+
+    const alarmTime = `${alarmHrs}:${alarmMin.toString().padStart(2, '0')}:${alarmSec.toString().padStart(2, '0')} ${alarmPeriod}`;
 
     if (isNaN(alarmHrs) || isNaN(alarmMin) || isNaN(alarmSec)) {
         alert('Please enter valid time.');
         return;
     }
 
-    const alarmTime = `${alarmHrs}:${alarmMin.toString().padStart(2, '0')}:${alarmSec.toString().padStart(2, '0')} ${alarmPeriod}`;
+    if (alarms.includes(alarmTime)) {
+        alert(`Alarm already set for this time ${alarmTime}`);
+    } else {
+        alarms.push(alarmTime);
+        displayAlarmsList();
+    }
 
-    alarms.push(alarmTime);
-    displayAlarmsList();
 });
 
 // display alarms
 function displayAlarmsList() {
-    const alarmsList = document.getElementById('alarms-list');
-    alarmsList.innerHTML = '';
+    alarmsListEle.innerHTML = '';
 
     alarms.map((alarm, idx) => {
-        let alarmDiv = document.createElement("div");
-        alarmDiv.classList.add("alarm");
-        alarmDiv.innerHTML = `
+        let alarmDivEle = document.createElement("div");
+        alarmDivEle.classList.add("alarm");
+        alarmDivEle.innerHTML = `
         	<span>
         	${alarm}
         	</span>
@@ -49,16 +58,16 @@ function displayAlarmsList() {
         	</button>
         `;
 
-        alarmDiv
+        alarmDivEle
             .querySelector(".delete-alarm")
             .addEventListener("click", () => {
-                alarmDiv.remove();
+                alarmDivEle.remove();
                 if (idx !== -1) {
                     alarms.splice(idx, 1);
                 }
             });
 
-        alarmsList.appendChild(alarmDiv);
+        alarmsListEle.appendChild(alarmDivEle);
     });
 }
 
