@@ -28,19 +28,13 @@ h1 {
   color: green;
 }
 
-h3 {
-  font-size: 1.0rem;
-  color: #333;
-}
-
 .time {
   font-size: 2rem;
   margin: 20px 0;
   color: #333;
 }
 
-#set-alarm-btn,
-#updateTime {
+#set-alarm-btn {
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -59,8 +53,7 @@ h3 {
   padding: 10px 15px;
 }
 
-#set-alarm-btn:hover,
-#updateTime:hover {
+#set-alarm-btn:hover {
   background-color: #0056b3;
 }
 
@@ -92,14 +85,4 @@ input[type=number] {
   align-items: center;
   animation: fadeIn 0.5s ease-in-out;
   font-size: 14px;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
 }
