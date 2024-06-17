@@ -9,13 +9,13 @@ const alarmsListEle = document.getElementById('alarms-list');
 // display current time
 function displayCurrentTime() {
     const now = new Date();
-    const curr_hrs = now.getHours() % 12 || 12;
-    const curr_min = now.getMinutes();
-    const curr_sec = now.getSeconds();
+    const currHrs = now.getHours() % 12 || 12;
+    const currMin = now.getMinutes();
+    const currSec = now.getSeconds();
     const period = now.getHours() < 12 ? 'AM' : 'PM';
 
-    CurrentTimeEle.textContent = `${curr_hrs}:${curr_min}:${curr_sec} ${period}`;
-    checkClockAlarm(`${curr_hrs}:${curr_min}:${curr_sec} ${period}`);
+    CurrentTimeEle.textContent = `${currHrs}:${currMin}:${currSec} ${period}`;
+    checkClockAlarm(`${currHrs}:${currMin}:${currSec} ${period}`);
 }
 
 // set alarm
@@ -79,7 +79,6 @@ function checkClockAlarm(currentTime) {
     alarms.map((alarm, idx) => {
         if (alarm === currentTime) {
             alert('Alarm ringing!');
-            alarms.splice(idx, 1);
             displayAlarmsList();
         }
     });
